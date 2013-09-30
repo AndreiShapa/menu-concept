@@ -1,0 +1,148 @@
+@import 'bourbon/bourbon';
+$max-width: 100%;
+@import 'neat/neat';
+
+body, button {
+	font-family: Avenir;
+	text-transform: uppercase;
+	font-weight: bold;
+}
+
+@mixin pad {
+	padding: 1em;
+}
+
+.page {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+
+	z-index: 0;
+}
+
+@mixin menu-transition {
+	@include transition(all 0.6s $ease-out-quint);
+}
+
+@mixin menu-close-transition {
+	@include transition(all 0.6s $ease-in-out-quint);
+}
+
+button {
+	position: fixed;
+	bottom: 2rem;
+	left: 50%;
+	width: 10rem;
+	margin-left: -5rem;
+	border: 2px solid white;
+	background: transparent;
+	@include pad();
+	letter-spacing: 2px;
+	color: white;
+	z-index: 2;
+	height: 3rem;
+	@include menu-transition();
+
+	span {
+		position: absolute;
+		top: 0;
+		line-height: 3rem;
+		left: 50%;
+		width: 10rem;
+		margin-left: -5rem;
+		@include menu-transition();
+	}
+
+	&.open {
+		width: 5rem;
+		left: 50%;
+		margin-left: -2.5rem;
+
+		@include menu-close-transition();
+
+		span {
+			@include menu-close-transition();
+		}
+
+		.close {
+			@include transform(translateY(0%));
+			opacity: 1;
+		}
+
+		.menu-text {
+			@include transform(translateY(-100%));
+			opacity: 0;
+		}
+	}
+
+	.close {
+		@include transform(translateY(100%));
+		font-size: 1.5rem;
+		opacity: 0;
+	}
+
+	.menu-text {
+		@include transform(translateY(0%));
+		opacity: 1;
+	}
+}
+
+.menu {
+	background: #E96054;
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	z-index: 1;
+
+	@include menu-transition();
+	@include transform(translateY(100%));
+
+	&.open {
+		@include transform(translateY(0%));
+		@include menu-close-transition();
+	}
+
+	@include pad();
+	color: white;
+	text-align: center;
+	font-weight: normal;
+
+	h1 {
+		font-size: 14px;
+		letter-spacing: 2px;
+	}
+
+	ul {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+
+		li {
+			font-weight: 500;
+			padding: 2em 1em;
+			border: 1px solid transparent;
+			border-bottom-color: rgba(255,255,255,0.5);
+			margin: 0px auto;
+
+			&:active {
+				margin: 0px;
+				border: 1px solid white;
+			}
+
+			span {
+				padding-right: 1em;
+				font-weight: normal;
+				font-family: Georgia;
+				font-style: italic;
+			}
+		}
+	}
+}
+
+.page {
+	background: #A0DAA1;
+}
